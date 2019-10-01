@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Emprestimo {
 
     private String id;
-    private Integer user;
+    private String user;
     private String livros;
     private String data;
     private String multa;
@@ -35,11 +35,11 @@ public class Emprestimo {
     }
     
 
-    public Integer getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(Integer user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
