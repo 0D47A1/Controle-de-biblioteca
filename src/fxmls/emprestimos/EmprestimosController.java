@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import controle.de.biblioteca.HomeController;
+import static controle.de.biblioteca.HomeController.showbox;
 import db.Database;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,8 +20,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import modelos.Emprestimo;
 import modelos.Tabela_livro;
 import modelos.Tabela_usuario;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 /**
  * FXML Controller class
@@ -182,8 +186,31 @@ public class EmprestimosController implements Initializable {
         
         
         emp_btn_emprestar.setOnAction(action ->{
-        
-        
+                  
+            if(emp_list_livros.getItems().size() != 0){
+                
+                Integer index_usuario =  emp_buscar_usuario.getSelectionModel().getSelectedIndex();
+                Tabela_usuario usuario_selecionado = emp_buscar_usuario.getItems().get(index_usuario); // Pega o objeto do usuario que está selecionado
+                
+                ArrayList<Integer> livros_ids = new ArrayList<>(); // Array armazenará temporariamente os ids(ISBN) de cada livro
+                
+                emp_list_livros.getItems().forEach(livro ->{
+                    
+                    livros_ids.add(livro.getISBN()); // adiciando o ISBN(id) no array
+                
+                });
+                
+                DateTime dataHoje = new DateTime(); 
+                Emprestimo emprestimo  = new Emprestimo();
+                           emprestimo.setUser(usuario_selecionado.getId()); // id do usuario que pegou o livro emprestado
+                           emprestimo.setLivros(livros_ids.toString()); // Lista de livros(ids) que será adicionado na coluna IDS_LIVROS da tabela emprestimos do banco de dados
+                           emprestimo.setData(dataHoje.toString(DateTimeFormat.forPattern("dd/MM/yyyy"))); // Pega a data atual do emprestimo
+                            
+                new Database().set_emprestimo(emprestimo); // Salva o emprestimo no banco de dados
+                           
+                showbox.close_box_emprestimo();
+            }
+                  
         
         });
         
