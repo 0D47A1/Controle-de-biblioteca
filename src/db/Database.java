@@ -34,7 +34,7 @@ public class Database {
                 
                     statement.execute("CREATE TABLE IF NOT EXISTS TABELA_LIVROS( ID INTEGER, ISBN INTEGER, TITULO STRING, AUTORES STRING, EDICAO STRING, EDITORA STRING, ANO INTEGER )");
                     statement.execute("CREATE TABLE IF NOT EXISTS TABELA_USUARIOS( ID INTEGER, NOME STRING, LOGIN STRING, SENHA STRING, TIPO STRING)");
-                    statement.execute("CREATE TABLE IF NOT EXISTS TABELA_EMPRESTIMOS( ID INTEGER, ID_USER INTEGER, IDS_LIVROS STRING, DATA STRING, MULTA STRING)");
+                    statement.execute("CREATE TABLE IF NOT EXISTS TABELA_EMPRESTIMOS( ID INTEGER, ID_USER STRING, IDS_LIVROS STRING, DATA STRING, MULTA STRING)");
                 }catch(SQLException e){
                     System.out.println(e.getMessage());
                 }catch(IOException ex){
@@ -281,11 +281,9 @@ public class Database {
                     
                     PreparedStatement statement = connection.prepareStatement("INSERT INTO TABELA_EMPRESTIMOS( ID, ID_USER, IDS_LIVROS, DATA) VALUES (?, ?, ?, ?)");
                                       statement.setString(1, emprestimo.getId());
-                                      statement.setInt(2, emprestimo.getUser());
+                                      statement.setString(2, emprestimo.getUser());
                                       statement.setString(3, emprestimo.getLivros());
                                       statement.setString(4, emprestimo.getData());
-                             
-                                   
 
                                       statement.executeUpdate();
                 }catch(SQLException e){
