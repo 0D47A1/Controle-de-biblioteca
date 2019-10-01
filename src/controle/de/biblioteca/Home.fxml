@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff;" stylesheets="@css/estilo.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.de.biblioteca.HomeController">
+    <children>
+      <JFXToolbar layoutY="7.0" prefHeight="70.0" prefWidth="366.0" style="-fx-background-color: #455A64;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="SISTEMA DE CONTROLE DE LIVROS" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
+                     <font>
+                        <Font name="Arial Bold" size="25.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </left>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+         <right>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXTextField focusColor="WHITE" prefHeight="58.0" prefWidth="691.0" promptText="Está procurando algum livro?" style="-fx-background-color: #546E7A; -fx-padding: 5;" styleClass="busca" unFocusColor="#455a64" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="4.0">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXTextField>
+               </children>
+            </AnchorPane>
+         </right>
+      </JFXToolbar>
+      <JFXTabPane layoutX="14.0" layoutY="91.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="651.0" prefWidth="1280.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+         <tabs>
+            <Tab text="Livros">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1280.0">
+                     <children>
+                        <JFXTreeTableView fx:id="tabela_livros" prefHeight="578.0" prefWidth="1260.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Usuarios">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1280.0">
+                     <children>
+                        <JFXTreeTableView id="tabela_usuarios" fx:id="tabela_usuarios" layoutX="27.0" layoutY="27.0" prefHeight="573.0" prefWidth="1260.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Empréstimos">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTreeTableView layoutX="14.0" layoutY="172.0" prefHeight="580.0" prefWidth="1260.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <HBox prefHeight="43.0" prefWidth="369.0" spacing="5.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="68.0">
+         <children>
+            <JFXButton fx:id="btn_registrar_livro" prefHeight="43.0" prefWidth="88.0" style="-fx-background-color: #3c5059;" text="Novo livro" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btn_registrar_usuario" prefHeight="43.0" prefWidth="108.0" style="-fx-background-color: #3c5059;" text="Novo usuário" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btn_registrar_emprestimo" prefHeight="43.0" prefWidth="140.0" style="-fx-background-color: #3c5059;" text="Novo empréstimo" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+      <Hyperlink focusTraversable="false" layoutX="14.0" layoutY="688.0" scaleShape="false" text="Sobre" textFill="WHITE" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="80.0" />
+      <StackPane fx:id="root_stackPane" prefHeight="150.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    </children>
+</AnchorPane>
