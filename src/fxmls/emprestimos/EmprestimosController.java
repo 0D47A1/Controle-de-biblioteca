@@ -205,7 +205,8 @@ public class EmprestimosController implements Initializable {
                            emprestimo.setUser(usuario_selecionado.getId()); // id do usuario que pegou o livro emprestado
                            emprestimo.setLivros(livros_ids.toString()); // Lista de livros(ids) que será adicionado na coluna IDS_LIVROS da tabela emprestimos do banco de dados
                            emprestimo.setData(dataHoje.toString(DateTimeFormat.forPattern("dd/MM/yyyy"))); // Pega a data atual do emprestimo
-                            
+                
+                HomeController.homeController.rows_tabela_emprestimo.add(emprestimo); // Adiciona na tabela emprestimo
                 new Database().set_emprestimo(emprestimo); // Salva o emprestimo no banco de dados
                            
                 showbox.close_box_emprestimo();
