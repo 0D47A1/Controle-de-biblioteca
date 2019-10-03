@@ -290,6 +290,33 @@ public class Database {
                     
                 }
     }
+    
+    
+     public ArrayList<Emprestimo> get_all_emprestimos(){
+           ArrayList<Emprestimo> emprestimos = new ArrayList<>();
+           try{
+                    Connection connection = this.connection();
+                    
+                    PreparedStatement statement = connection.prepareStatement("SELECT FROM * TABELA_EMPRESTIMOS");
+                                  
+
+                    ResultSet resultado =  statement.executeQuery();
+                    
+                    while (resultado.next()) {
+                           Emprestimo emprestimo = new Emprestimo();
+                                      emprestimo.setId(resultado.getString("ID"));
+                                      emprestimo.setUser(resultado.getString("ID_USER"));
+                                      emprestimo.setLivros(resultado.getString("IDS_LIVROS"));
+                                      emprestimo.setData(resultado.getString("DATA"));
+                                      
+                            emprestimos.add(emprestimo);
+                    }
+                }catch(SQLException e){
+                    
+                }
+           
+           return emprestimos;
+    }
 
     
 }
