@@ -297,7 +297,7 @@ public class Database {
            try{
                     Connection connection = this.connection();
                     
-                    PreparedStatement statement = connection.prepareStatement("SELECT FROM * TABELA_EMPRESTIMOS");
+                    PreparedStatement statement = connection.prepareStatement("SELECT * FROM TABELA_EMPRESTIMOS");
                                   
 
                     ResultSet resultado =  statement.executeQuery();
