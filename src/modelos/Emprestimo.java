@@ -5,13 +5,14 @@
  */
 package modelos;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.util.UUID;
 
 /**
  *
  * @author melksedek
  */
-public class Emprestimo {
+public class Emprestimo extends RecursiveTreeObject<Emprestimo>{
 
     private String id;
     private String user;
