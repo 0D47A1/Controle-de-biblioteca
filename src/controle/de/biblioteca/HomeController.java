@@ -44,6 +44,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
+import modelos.Emprestimo;
 import modelos.Tabela_livro;
 import modelos.Tabela_usuario;
 
@@ -77,6 +78,9 @@ public class HomeController implements Initializable {
     private JFXTreeTableView<Tabela_usuario> tabela_usuarios;
     
     @FXML
+    private JFXTreeTableView<Emprestimo> tabela_emprestimos;
+    
+    @FXML
     private JFXComboBox<String> emp_lelecionar_livro;
     
     private JFXButton btn ;
@@ -88,6 +92,7 @@ public class HomeController implements Initializable {
     
     public ObservableList<Tabela_livro> rows_tabela_livres;
     public ObservableList<Tabela_usuario> rows_tabela_usuarios;
+    public ObservableList<Emprestimo> rows_tabela_emprestimo;
     
     public Boolean update ;
     
@@ -129,14 +134,7 @@ public class HomeController implements Initializable {
        
        rows_tabela_livres = FXCollections.observableArrayList();
         
-        /*Tabela_livro linha = new Tabela_livro();
-                     linha.setISBN(587932247);
-                     linha.setTitulo("Narnia");
-                     linha.setAutores("Melquizedeque");
-                     linha.setEdicao("Seila");
-                     linha.setEditora("São paulo");
-                     linha.setAno(2018);
-        lista.add(linha);*/
+       
         ArrayList<Tabela_livro> livros = new Database().get_livros() ; //null; 
         
         if(livros != null){
@@ -175,14 +173,7 @@ public class HomeController implements Initializable {
        
        rows_tabela_usuarios = FXCollections.observableArrayList();
         
-        /*Tabela_livro linha = new Tabela_livro();
-                     linha.setISBN(587932247);
-                     linha.setTitulo("Narnia");
-                     linha.setAutores("Melquizedeque");
-                     linha.setEdicao("Seila");
-                     linha.setEditora("São paulo");
-                     linha.setAno(2018);
-        lista.add(linha);*/
+        
         ArrayList<Tabela_usuario> usuarios = new Database().get_usuario(); //null; 
         
         if(usuarios != null){
@@ -199,7 +190,46 @@ public class HomeController implements Initializable {
         
         /* FIM CONSTRUÇAO DA TABELA USUARIO  */
         
-  
+        
+        
+         /* INICIO CONSTRUÇAO DA TABELA EMPRESTIMO  */
+         
+        JFXTreeTableColumn<Emprestimo,String> Usuario = new JFXTreeTableColumn<>("Usuario");        
+        JFXTreeTableColumn<Emprestimo,String> Livros = new JFXTreeTableColumn<>("Livros");
+        JFXTreeTableColumn<Emprestimo,String> Data = new JFXTreeTableColumn<>("Data");
+        JFXTreeTableColumn<Emprestimo,HBox> buttons_emprestimo = new JFXTreeTableColumn<>("Ações");
+    //    buttons.prefWidthProperty().bind(personTable.widthProperty().divide(4));
+    
+        Usuario.prefWidthProperty().bind(tabela_emprestimos.widthProperty().subtract(261).divide(3));      
+        Livros.prefWidthProperty().bind(tabela_emprestimos.widthProperty().subtract(261).divide(3));
+        Data.prefWidthProperty().bind(tabela_emprestimos.widthProperty().subtract(261).divide(3));       
+        buttons_emprestimo.prefWidthProperty().set(260);
+
+        
+        Usuario.setCellValueFactory((param)-> new SimpleObjectProperty(param.getValue().getValue().getUser()));
+        Livros.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getValue().getLivros()));
+        Data.setCellValueFactory(( param)-> new SimpleStringProperty(param.getValue().getValue().getData()));      
+        //buttons_emprestimo.setCellValueFactory((param)-> new SimpleObjectProperty<>(param.getValue().getValue().get()));
+       
+       rows_tabela_emprestimo = FXCollections.observableArrayList();
+        
+       
+        ArrayList<Emprestimo> emprestimos = new Database().get_all_emprestimos(); //null; 
+        
+        if(emprestimos != null){
+            emprestimos.forEach((emprestimo)->{
+                System.out.println("Emprestimo usuario "+emprestimo.getUser());
+                rows_tabela_emprestimo.add(emprestimo);
+            });   
+        }
+       
+          
+        final TreeItem<Emprestimo> content_emprestimo = new RecursiveTreeItem<Emprestimo>(rows_tabela_emprestimo, RecursiveTreeObject::getChildren);
+        tabela_emprestimos.getColumns().setAll(Usuario,Livros,Data,buttons_emprestimo);
+        tabela_emprestimos.setRoot(content_emprestimo);
+        tabela_emprestimos.setShowRoot(false);
+        
+        /* FIM CONSTRUÇAO DA TABELA EMPRESTIMO  */
        
         btn_registrar_livro.setOnAction((action)->{
             update = false;
