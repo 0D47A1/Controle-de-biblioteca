@@ -174,7 +174,7 @@ public class HomeController implements Initializable {
        rows_tabela_usuarios = FXCollections.observableArrayList();
         
         
-        ArrayList<Tabela_usuario> usuarios = new Database().get_usuario(); //null; 
+        ArrayList<Tabela_usuario> usuarios = new Database().get_all_usuario(); //null; 
         
         if(usuarios != null){
             usuarios.forEach((usuario)->{
