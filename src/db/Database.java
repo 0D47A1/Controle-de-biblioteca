@@ -132,6 +132,33 @@ public class Database {
         
     }
     
+     public Tabela_livro get_livro(Integer id) {
+            
+        Connection connection = this.connection();
+        Tabela_livro livro = new Tabela_livro();
+         
+            try{
+                
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM TABELA_LIVROS WHERE ISBN = ?");                
+                                  statement.setInt(1, id);                                  
+                              
+                ResultSet resultSet = statement.executeQuery();             
+                    
+                
+                livro.setISBN(resultSet.getInt("ISBN"));
+                livro.setTitulo(resultSet.getString("TITULO"));
+                livro.setAutores(resultSet.getString("AUTORES"));
+                livro.setEdicao(resultSet.getString("EDICAO"));
+                livro.setEditora(resultSet.getString("EDITORA"));
+                livro.setAno(resultSet.getInt("ANO"));
+                
+            }catch(SQLException e){
+                
+            }
+            
+             return livro;
+    }
+     
     public void update_livro(Tabela_livro livro){
            try{
                 Connection connection = this.connection();
@@ -309,7 +336,7 @@ public class Database {
                     
                     PreparedStatement statement = connection.prepareStatement("INSERT INTO TABELA_EMPRESTIMOS( ID, ID_USER, IDS_LIVROS, DATA) VALUES (?, ?, ?, ?)");
                                       statement.setString(1, emprestimo.getId());
-                                      statement.setString(2, emprestimo.getUser());
+                                      statement.setString(2, emprestimo.getUser().getId());
                                       statement.setString(3, emprestimo.getLivros());
                                       statement.setString(4, emprestimo.getData());
 
