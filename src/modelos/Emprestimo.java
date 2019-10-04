@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Emprestimo extends RecursiveTreeObject<Emprestimo>{
 
     private String id;
-    private String user;
+    private Tabela_usuario user;
     private String livros;
     private String data;
     private String multa;
@@ -36,11 +36,11 @@ public class Emprestimo extends RecursiveTreeObject<Emprestimo>{
     }
     
 
-    public String getUser() {
+    public Tabela_usuario getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(Tabela_usuario user) {
         this.user = user;
     }
 
