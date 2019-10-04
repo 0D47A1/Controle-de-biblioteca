@@ -81,6 +81,7 @@ public class EmprestimosController implements Initializable {
                     if(index < 0){
                         System.out.println(emp_selecionar_livro.getItems().contains(item));
                         emp_selecionar_livro.getItems().add(item);
+                        
                         autoCompleteLivro.getSuggestions().add(item);
                     }
                  
@@ -91,7 +92,8 @@ public class EmprestimosController implements Initializable {
             autoCompleteLivro.filter(item -> item.getTitulo().contains(editor_livro.getText()));
            
             if (autoCompleteLivro.getFilteredSuggestions().isEmpty() || emp_selecionar_livro.showingProperty().get()) {
-                autoCompleteLivro.hide();                 
+                autoCompleteLivro.hide();
+                
             }else {
                 autoCompleteLivro.show(editor_livro);
             }
@@ -113,12 +115,14 @@ public class EmprestimosController implements Initializable {
                if(emp_list_livros.getItems().size() < 5){
                    if(!emp_list_livros.getItems().contains(livro_selecionado)){
                         emp_list_livros.getItems().add(livro_selecionado);
+                        
                     }
                }
            }else{
                 if(emp_list_livros.getItems().size() < 3){
                    if(!emp_list_livros.getItems().contains(livro_selecionado)){
                         emp_list_livros.getItems().add(livro_selecionado);
+                        
                     }
                 }
            }
@@ -202,7 +206,7 @@ public class EmprestimosController implements Initializable {
                 
                 DateTime dataHoje = new DateTime(); 
                 Emprestimo emprestimo  = new Emprestimo();
-                           emprestimo.setUser(usuario_selecionado.getId()); // id do usuario que pegou o livro emprestado
+                           emprestimo.setUser(usuario_selecionado); // id do usuario que pegou o livro emprestado
                            emprestimo.setLivros(livros_ids.toString()); // Lista de livros(ids) que será adicionado na coluna IDS_LIVROS da tabela emprestimos do banco de dados
                            emprestimo.setData(dataHoje.toString(DateTimeFormat.forPattern("dd/MM/yyyy"))); // Pega a data atual do emprestimo
                 

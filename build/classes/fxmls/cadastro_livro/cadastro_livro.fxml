@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fff;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmls.cadastro_livro.Cadastro_livroController">
+    <stylesheets>
+        <URL value="@cadastro_livro.css" />
+    </stylesheets>
+   <children>
+      <JFXTextField id="cadastro_livro_ISBN" fx:id="cadastro_livro_ISBN" focusColor="#455a64" layoutX="34.0" layoutY="109.0" prefHeight="48.0" prefWidth="250.0" promptText="ISBN" style="-fx-background-color: #f5f5f5; -fx-border-radius: 5px;" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField id="cadastro_livro_titulo" fx:id="cadastro_livro_titulo" focusColor="#455a64" layoutX="324.0" layoutY="109.0" prefHeight="48.0" prefWidth="250.0" promptText="Titulo" style="-fx-background-color: #f5f5f5; -fx-border-radius: 5px;" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="30.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField id="cadastro_livro_autores" fx:id="cadastro_livro_autores" focusColor="#455a64" layoutX="30.0" layoutY="189.0" prefHeight="48.0" prefWidth="250.0" promptText="Autores" style="-fx-background-color: #f5f5f5; -fx-border-radius: 5px;" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField id="cadastro_livro_edicao" fx:id="cadastro_livro_edicao" focusColor="#455a64" layoutX="241.0" layoutY="189.0" prefHeight="48.0" prefWidth="250.0" promptText="Edição" style="-fx-background-color: #f5f5f5; -fx-border-radius: 5px;" AnchorPane.rightAnchor="30.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField id="cadastro_livro_editora" fx:id="cadastro_livro_editora" focusColor="#455a64" layoutX="30.0" layoutY="267.0" prefHeight="48.0" prefWidth="250.0" promptText="Editora" style="-fx-background-color: #f5f5f5; -fx-border-radius: 5px;" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField id="cadastro_livro_ano" fx:id="cadastro_livro_ano" focusColor="#455a64" layoutX="327.0" layoutY="267.0" prefHeight="48.0" prefWidth="250.0" promptText="Ano" style="-fx-background-color: #f5f5f5; -fx-border-radius: 5px;" AnchorPane.rightAnchor="30.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btn_cadastro_livro_salvar" layoutX="434.0" layoutY="332.0" prefHeight="59.0" prefWidth="250.0" style="-fx-background-color: #00838F;" text="Salvar" textFill="WHITE" AnchorPane.rightAnchor="30.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label fx:id="cadastro_titulo" alignment="CENTER" layoutX="131.0" layoutY="14.0" style="-fx-text-fill: #455A64;" text="Cadastrar livro" textFill="#6f6f6f">
+         <font>
+            <Font name="Arial Bold" size="48.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btn_cadastro_livro_cancelar" layoutX="30.0" layoutY="332.0" prefHeight="59.0" prefWidth="250.0" style="-fx-background-color: #c62828;" text="Cancelar" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      
+   </children>
+</AnchorPane>

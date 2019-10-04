@@ -1,0 +1,18 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+
+#cad_user_nome:not(:focus) #validador{
+    display: none;
+    -fx-display-caret: false;
+    -fx-opacity: 0;
+}
+#cad_user_nome:not(:focus) .error-label {
+   
+    -fx-opacity: 0;
+}

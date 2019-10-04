@@ -195,7 +195,7 @@ public class HomeController implements Initializable {
          /* INICIO CONSTRUÇAO DA TABELA EMPRESTIMO  */
          
         JFXTreeTableColumn<Emprestimo,String> Usuario = new JFXTreeTableColumn<>("Usuario");        
-        JFXTreeTableColumn<Emprestimo,String> Livros = new JFXTreeTableColumn<>("Livros");
+        JFXTreeTableColumn<Emprestimo,JFXComboBox<Tabela_livro>> Livros = new JFXTreeTableColumn<>("Livros emprestados");
         JFXTreeTableColumn<Emprestimo,String> Data = new JFXTreeTableColumn<>("Data");
         JFXTreeTableColumn<Emprestimo,HBox> buttons_emprestimo = new JFXTreeTableColumn<>("Ações");
     //    buttons.prefWidthProperty().bind(personTable.widthProperty().divide(4));
@@ -207,7 +207,7 @@ public class HomeController implements Initializable {
 
         
         Usuario.setCellValueFactory((param)-> new SimpleObjectProperty(param.getValue().getValue().getUser()));
-        Livros.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getValue().getLivros()));
+        Livros.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getValue().getCombox_livros()));
         Data.setCellValueFactory(( param)-> new SimpleStringProperty(param.getValue().getValue().getData()));      
         //buttons_emprestimo.setCellValueFactory((param)-> new SimpleObjectProperty<>(param.getValue().getValue().get()));
        

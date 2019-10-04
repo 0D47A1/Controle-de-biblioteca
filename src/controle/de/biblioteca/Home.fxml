@@ -74,7 +74,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <JFXTreeTableView layoutX="14.0" layoutY="172.0" prefHeight="580.0" prefWidth="1260.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                        <JFXTreeTableView fx:id="tabela_emprestimos" layoutX="14.0" layoutY="172.0" prefHeight="580.0" prefWidth="1260.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
