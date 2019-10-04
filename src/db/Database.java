@@ -162,7 +162,7 @@ public class Database {
                 }
     }
     
-    public ArrayList<Tabela_usuario> get_usuario(){
+    public ArrayList<Tabela_usuario> get_all_usuario(){
         Connection connection = this.connection();
         
         ArrayList<Tabela_usuario> list = new ArrayList<>();   
@@ -227,6 +227,34 @@ public class Database {
             }
             
              return list;
+    }
+    
+      public Tabela_usuario get_user(String id) {
+            Connection connection = this.connection();  
+            Tabela_usuario usuario = new Tabela_usuario();
+            try{
+             
+                                 
+                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM TABELA_USUARIOS WHERE ID = ?");
+                                  stmt.setString(1, id);
+                     
+                ResultSet resultSet = stmt.executeQuery();            
+                    
+                    usuario.setId(resultSet.getString("ID"));
+                    usuario.setNome(resultSet.getString("NOME"));
+                    usuario.setLogin(resultSet.getString("LOGIN"));
+                    usuario.setSenha(resultSet.getString("SENHA"));
+                    usuario.setTipo(resultSet.getString("TIPO"));                  
+                                        
+                   
+          
+               
+                
+            }catch(SQLException e){
+                
+            }
+            
+             return usuario;
     }
     
     public void set_usuario(Tabela_usuario usuario){
