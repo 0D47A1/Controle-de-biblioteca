@@ -333,7 +333,7 @@ public class Database {
                     while (resultado.next()) {
                            Emprestimo emprestimo = new Emprestimo();
                                       emprestimo.setId(resultado.getString("ID"));
-                                      emprestimo.setUser(resultado.getString("ID_USER"));
+                                      emprestimo.setUser(get_user(resultado.getString("ID_USER")));
                                       emprestimo.setLivros(resultado.getString("IDS_LIVROS"));
                                       emprestimo.setData(resultado.getString("DATA"));
                                       
