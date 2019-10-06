@@ -195,7 +195,7 @@ public class HomeController implements Initializable {
          /* INICIO CONSTRUÇAO DA TABELA EMPRESTIMO  */
          
         JFXTreeTableColumn<Emprestimo,String> Usuario = new JFXTreeTableColumn<>("Usuario");        
-        JFXTreeTableColumn<Emprestimo,JFXComboBox<Tabela_livro>> Livros = new JFXTreeTableColumn<>("Livros emprestados");
+        JFXTreeTableColumn<Emprestimo,AnchorPane> Livros = new JFXTreeTableColumn<>("Livros emprestados");
         JFXTreeTableColumn<Emprestimo,String> Data = new JFXTreeTableColumn<>("Data");
         JFXTreeTableColumn<Emprestimo,HBox> buttons_emprestimo = new JFXTreeTableColumn<>("Ações");
     //    buttons.prefWidthProperty().bind(personTable.widthProperty().divide(4));
