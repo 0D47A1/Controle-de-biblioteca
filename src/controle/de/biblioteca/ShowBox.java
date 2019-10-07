@@ -6,14 +6,20 @@
 package controle.de.biblioteca;
 
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
+import db.Database;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import modelos.Emprestimo;
 import modelos.Tabela_livro;
 import modelos.Tabela_usuario;
 
@@ -27,6 +33,7 @@ public class ShowBox {
          private JFXDialog dialog_cadastro_livro;
          private JFXDialog dialog_cadastro_usuario;
          private JFXDialog dialog_cadastro_emprestimo;
+         private JFXDialog dialog_cadastro_emprestimo_detalhe;
         
          
          ShowBox(StackPane root) {
@@ -95,7 +102,7 @@ public class ShowBox {
         }
     }
     
-    public void show_box_emprestimo(Tabela_usuario usuario){
+    public void show_box_emprestimo(Emprestimo usuario){
           
         try{
 
@@ -117,6 +124,40 @@ public class ShowBox {
         
         
     }
+    
+    public void show_box_emprestimo_detalhe(Emprestimo emprestimo){
+          
+        try{
+
+                Node node = (Node)FXMLLoader.load(getClass().getResource("/fxmls/emprestado/emprestado.fxml"));
+                if(emprestimo != null){
+                    Label empre_usuario = (Label) node.lookup("#empre_usuario");  
+                    JFXListView<Tabela_livro> empre_list = (JFXListView) node.lookup("#empre_list");
+                    
+                    List<String> list =  Arrays.asList(emprestimo.getLivros().replace("[","").replace("]","").split(","));
+        
+                    list.forEach(id->{        
+
+                            empre_list.getItems().add(new Database().get_livro(Integer.valueOf(id.trim())));
+                    });
+
+                    empre_usuario.setText(emprestimo.getUser().toString());
+ 
+                }                 
+                dialog_cadastro_emprestimo_detalhe= new JFXDialog();
+                dialog_cadastro_emprestimo_detalhe.setOnDialogClosed((handler)-> root_stackPane.setVisible(false));
+                
+                dialog_cadastro_emprestimo_detalhe.setContent((Region) node);
+
+                root_stackPane.setVisible(true);
+                dialog_cadastro_emprestimo_detalhe.show(root_stackPane);
+
+        }catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
 
     public void close_box_livro() {
         dialog_cadastro_livro.close();
@@ -128,5 +169,8 @@ public class ShowBox {
     
     public void close_box_emprestimo() {
          dialog_cadastro_emprestimo.close();
+    }
+    public void close_box_emprestimo_detalhe(){
+        dialog_cadastro_emprestimo_detalhe.close();
     }
 }

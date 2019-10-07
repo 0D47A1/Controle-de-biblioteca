@@ -5,13 +5,18 @@
  */
 package modelos;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import static controle.de.biblioteca.HomeController.homeController;
+import static controle.de.biblioteca.HomeController.showbox;
 import db.Database;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 
 /**
  *
@@ -65,6 +70,25 @@ public class Emprestimo extends RecursiveTreeObject<Emprestimo>{
         anchor.setRightAnchor(livros,00.0);
         anchor.getChildren().add(livros);
         return anchor;
+    }
+    
+    public HBox getButtonsAction(){
+        
+        HBox grupo = new HBox(5);        
+        grupo.setAlignment(Pos.CENTER);
+       
+        JFXButton devolver = new JFXButton("Detalhes");      
+        
+        devolver.setOnAction((event)->{
+            
+             showbox.show_box_emprestimo_detalhe(this);
+                
+        });
+        
+        devolver.setStyle("-fx-background-color:#0277BD;  -fx-text-fill:#fff");        
+        
+        grupo.getChildren().addAll(devolver);        
+        return grupo;
     }
     public String getLivros() {
         return livros;
