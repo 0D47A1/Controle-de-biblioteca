@@ -87,6 +87,7 @@ public class HomeController implements Initializable {
     
     public static HomeController homeController;
     public static ShowBox showbox;
+    public static Emprestimo emprestimo_data;
     public JFXDialog dialog_cadastro_livro;
     public JFXDialog dialog_cadastro_usuario;
     

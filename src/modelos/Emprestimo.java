@@ -8,6 +8,7 @@ package modelos;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import static controle.de.biblioteca.HomeController.emprestimo_data;
 import static controle.de.biblioteca.HomeController.homeController;
 import static controle.de.biblioteca.HomeController.showbox;
 import db.Database;
@@ -80,8 +81,8 @@ public class Emprestimo extends RecursiveTreeObject<Emprestimo>{
         JFXButton devolver = new JFXButton("Detalhes");      
         
         devolver.setOnAction((event)->{
-            
-             showbox.show_box_emprestimo_detalhe(this);
+             emprestimo_data = this;
+             showbox.show_box_emprestimo_detalhe();
                 
         });
         

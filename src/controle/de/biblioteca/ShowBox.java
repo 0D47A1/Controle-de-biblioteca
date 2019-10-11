@@ -23,6 +23,8 @@ import modelos.Emprestimo;
 import modelos.Tabela_livro;
 import modelos.Tabela_usuario;
 
+import static controle.de.biblioteca.HomeController.emprestimo_data;
+
 /**
  *
  * @author melksedek
@@ -125,25 +127,12 @@ public class ShowBox {
         
     }
     
-    public void show_box_emprestimo_detalhe(Emprestimo emprestimo){
+    public void show_box_emprestimo_detalhe(){
           
         try{
 
-                Node node = (Node)FXMLLoader.load(getClass().getResource("/fxmls/emprestado/emprestado.fxml"));
-                if(emprestimo != null){
-                    Label empre_usuario = (Label) node.lookup("#empre_usuario");  
-                    JFXListView<Tabela_livro> empre_list = (JFXListView) node.lookup("#empre_list");
-                    
-                    List<String> list =  Arrays.asList(emprestimo.getLivros().replace("[","").replace("]","").split(","));
-        
-                    list.forEach(id->{        
-
-                            empre_list.getItems().add(new Database().get_livro(Integer.valueOf(id.trim())));
-                    });
-
-                    empre_usuario.setText(emprestimo.getUser().toString());
- 
-                }                 
+                Node node = (Node)FXMLLoader.load(getClass().getResource("/fxmls/emprestado/emprestado.fxml"));                          
+                
                 dialog_cadastro_emprestimo_detalhe= new JFXDialog();
                 dialog_cadastro_emprestimo_detalhe.setOnDialogClosed((handler)-> root_stackPane.setVisible(false));
                 

@@ -203,7 +203,7 @@ public class EmprestimosController implements Initializable {
                 emp_list_livros.getItems().forEach(livro ->{
                     
                     livros_ids.add(livro.getISBN()); // adiciando o ISBN(id) no array
-                    livros_data_emprestimo.add(dataHoje.toString(DateTimeFormat.forPattern("dd/MM/yyyy"))); // a data do emprestimo do livro
+                    livros_data_emprestimo.add(dataHoje.toString()); // a data do emprestimo do livro
                 });
                 
                 
