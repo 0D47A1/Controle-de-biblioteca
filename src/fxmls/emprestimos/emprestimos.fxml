@@ -23,6 +23,6 @@
       <JFXComboBox fx:id="emp_selecionar_livro" disable="true" editable="true" layoutX="251.0" layoutY="212.0" prefHeight="55.0" prefWidth="204.0" promptText="Buscar livro" />
       <JFXButton fx:id="emp_btn_add_livro" disable="true" layoutX="461.0" layoutY="212.0" prefHeight="55.0" prefWidth="86.0" style="-fx-background-color: #455A64;" text="Adicionar" textFill="WHITE" />
       <JFXComboBox fx:id="emp_buscar_usuario" editable="true" layoutX="251.0" layoutY="139.0" prefHeight="55.0" prefWidth="296.0" promptText="Buscar usuário" />
-      <JFXButton fx:id="emp_btn_emprestar" alignment="CENTER" layoutX="217.0" layoutY="318.0" prefHeight="55.0" prefWidth="200.0" style="-fx-background-color: #455A64;" text="Emprestar" textFill="WHITE" />
+      <JFXButton fx:id="emp_btn_emprestar" alignment="CENTER" disable="true" layoutX="217.0" layoutY="318.0" prefHeight="55.0" prefWidth="200.0" style="-fx-background-color: #455A64;" text="Emprestar" textFill="WHITE" />
    </children>
 </AnchorPane>

@@ -196,8 +196,8 @@ public class HomeController implements Initializable {
          /* INICIO CONSTRUÇAO DA TABELA EMPRESTIMO  */
          
         JFXTreeTableColumn<Emprestimo,String> Usuario = new JFXTreeTableColumn<>("Usuario");        
-        JFXTreeTableColumn<Emprestimo,AnchorPane> Livros = new JFXTreeTableColumn<>("Livros emprestados");
-        JFXTreeTableColumn<Emprestimo,String> Data = new JFXTreeTableColumn<>("Data");
+        JFXTreeTableColumn<Emprestimo,String> Livros = new JFXTreeTableColumn<>("Livros emprestados");
+        JFXTreeTableColumn<Emprestimo,String> Data = new JFXTreeTableColumn<>("Periodo");
         
         JFXTreeTableColumn<Emprestimo,HBox> buttons_emprestimo = new JFXTreeTableColumn<>("Ações");
     //    buttons.prefWidthProperty().bind(personTable.widthProperty().divide(4));
@@ -209,8 +209,8 @@ public class HomeController implements Initializable {
 
         
         Usuario.setCellValueFactory((param)-> new SimpleObjectProperty(param.getValue().getValue().getUser()));
-        Livros.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getValue().getCombox_livros()));
-        Data.setCellValueFactory(( param)-> new SimpleStringProperty(param.getValue().getValue().getData()));      
+        Livros.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getValue().getQuantLivros()));
+        Data.setCellValueFactory(( param)-> new SimpleStringProperty(param.getValue().getValue().getPeriodo()));      
         buttons_emprestimo.setCellValueFactory((param)-> new SimpleObjectProperty<>(param.getValue().getValue().getButtonsAction()));
        
        rows_tabela_emprestimo = FXCollections.observableArrayList();

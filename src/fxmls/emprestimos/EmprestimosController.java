@@ -10,10 +10,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import controle.de.biblioteca.HomeController;
+import static controle.de.biblioteca.HomeController.emprestimo_data;
 import static controle.de.biblioteca.HomeController.showbox;
 import db.Database;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
 import javafx.collections.ObservableList;
@@ -48,6 +51,8 @@ public class EmprestimosController implements Initializable {
     @FXML
     private JFXButton emp_btn_emprestar;
     
+    
+    private Emprestimo emprestimo;
    
     
     @Override
@@ -110,7 +115,7 @@ public class EmprestimosController implements Initializable {
            Integer index_usuario =  emp_buscar_usuario.getSelectionModel().getSelectedIndex();
            Tabela_usuario usuario_selecionado = emp_buscar_usuario.getItems().get(index_usuario);
            
-           System.out.println(usuario_selecionado.getTipo());
+           
            if(usuario_selecionado.getTipo().equals("Professor")){
                if(emp_list_livros.getItems().size() < 5){
                    if(!emp_list_livros.getItems().contains(livro_selecionado)){
@@ -146,8 +151,49 @@ public class EmprestimosController implements Initializable {
             Integer index_usuario =  emp_buscar_usuario.getSelectionModel().getSelectedIndex();
             
             if(index_usuario != -1){
-                emp_selecionar_livro.disableProperty().set(false);
-                emp_btn_add_livro.disableProperty().set(false);
+                Tabela_usuario usuario_selecionado = emp_buscar_usuario.getItems().get(index_usuario);
+                Emprestimo emprestimo  = new Database().get_emprestimo_byUser(usuario_selecionado.getId());                
+                
+                if(emprestimo!=null){
+                    
+                    this.emprestimo = emprestimo;
+                    List<String> list =  Arrays.asList(emprestimo.getLivros().replace("[","").replace("]","").split(","));              
+                    emp_list_livros.getItems().clear();
+                    list.forEach(id->{     
+                        
+                             Tabela_livro livro = new Database().get_livro(Integer.valueOf(id.trim()));
+                             
+                             Integer index =  IntStream.range(0, emp_list_livros.getItems().size())
+                            .filter(i -> emp_list_livros.getItems().get(i).getTitulo().equals(livro.getTitulo()))
+                            .findAny()
+                            .orElse(-1);
+                             
+                             if(index < 0){
+                                emp_list_livros.getItems().add(livro);
+                            }
+                            
+                    });
+                    
+                }else{
+                    this.emprestimo = null;
+                    emp_list_livros.getItems().clear();
+                }
+                
+                
+                if(usuario_selecionado.getTipo().equals("Professor")){
+                      if(emp_list_livros.getItems().size() < 5){
+                            emp_selecionar_livro.disableProperty().set(false);
+                            emp_btn_emprestar.disableProperty().set(false);
+                            emp_btn_add_livro.disableProperty().set(false);
+                      }
+                 }else{
+                       if(emp_list_livros.getItems().size() < 3){
+                            emp_selecionar_livro.disableProperty().set(false);
+                            emp_btn_emprestar.disableProperty().set(false);
+                            emp_btn_add_livro.disableProperty().set(false);
+                       }
+                }
+                
               
             }
             
@@ -193,28 +239,63 @@ public class EmprestimosController implements Initializable {
                   
             if(emp_list_livros.getItems().size() != 0){
                 
-                Integer index_usuario =  emp_buscar_usuario.getSelectionModel().getSelectedIndex();
-                Tabela_usuario usuario_selecionado = emp_buscar_usuario.getItems().get(index_usuario); // Pega o objeto do usuario que está selecionado
-                
                 DateTime dataHoje = new DateTime(); 
-                
-                ArrayList<Integer> livros_ids = new ArrayList<>(); // Array armazenará temporariamente os ids(ISBN) de cada livro
-                ArrayList<String> livros_data_emprestimo = new ArrayList<>();
-                emp_list_livros.getItems().forEach(livro ->{
+                if(this.emprestimo == null) {
                     
-                    livros_ids.add(livro.getISBN()); // adiciando o ISBN(id) no array
-                    livros_data_emprestimo.add(dataHoje.toString()); // a data do emprestimo do livro
-                });
-                
-                
-                Emprestimo emprestimo  = new Emprestimo();
-                           emprestimo.setUser(usuario_selecionado); // id do usuario que pegou o livro emprestado
-                           emprestimo.setLivros(livros_ids.toString()); // Lista de livros(ids) que será adicionado na coluna IDS_LIVROS da tabela emprestimos do banco de dados
-                           emprestimo.setData(livros_data_emprestimo.toString()); 
-                
-                HomeController.homeController.rows_tabela_emprestimo.add(emprestimo); // Adiciona na tabela emprestimo
-                new Database().set_emprestimo(emprestimo); // Salva o emprestimo no banco de dados
-                           
+                        Integer index_usuario =  emp_buscar_usuario.getSelectionModel().getSelectedIndex();
+                        Tabela_usuario usuario_selecionado = emp_buscar_usuario.getItems().get(index_usuario); // Pega o objeto do usuario que está selecionado
+
+                        
+
+                        ArrayList<Integer> livros_ids = new ArrayList<>(); // Array armazenará temporariamente os ids(ISBN) de cada livro
+                        ArrayList<String> livros_data_emprestimo = new ArrayList<>();
+                        emp_list_livros.getItems().forEach(livro ->{
+
+                            livros_ids.add(livro.getISBN()); // adiciando o ISBN(id) no array
+                            livros_data_emprestimo.add(dataHoje.toString()); // a data do emprestimo do livro
+                        });
+
+                        
+                        Emprestimo emprestimo  = new Emprestimo();
+                                   emprestimo.setUser(usuario_selecionado); // id do usuario que pegou o livro emprestado
+                                   emprestimo.setLivros(livros_ids.toString()); // Lista de livros(ids) que será adicionado na coluna IDS_LIVROS da tabela emprestimos do banco de dados
+                                   emprestimo.setData(livros_data_emprestimo.toString()); 
+
+                        HomeController.homeController.rows_tabela_emprestimo.add(emprestimo); // Adiciona na tabela emprestimo
+                        new Database().set_emprestimo(emprestimo); // Salva o emprestimo no banco de dados
+                        
+                }else{
+                     
+                    ArrayList<String> livros_data_emprestimo =  new ArrayList<String>(Arrays.asList(this.emprestimo.getData().replace("[","").replace("]","").replace(" ", "").split(","))); 
+                    
+                    ArrayList<String> livros_ids =  new ArrayList<String>(Arrays.asList(this.emprestimo.getLivros().replace("[","").replace("]","").replace(" ", "").split(",")));
+                        
+                    
+                    emp_list_livros.getItems().forEach(livro ->{
+                            if(!livros_ids.contains(livro.getISBN().toString())){                               
+                               
+                               livros_ids.add(livro.getISBN().toString()); 
+                               livros_data_emprestimo.add(dataHoje.toString()); 
+                            }
+                            
+                   });
+                    
+                   this.emprestimo.setLivros(livros_ids.toString());
+                   this.emprestimo.setData(livros_data_emprestimo.toString());            
+                   
+                   
+                   Integer index =  IntStream.range(0, HomeController.homeController.rows_tabela_emprestimo.size())
+                                    .filter(i -> HomeController.homeController.rows_tabela_emprestimo.get(i).getId().equals(this.emprestimo.getId()))
+                                    .findAny()
+                                    .orElse(-1);
+              
+                   if(index >-1){
+                       HomeController.homeController.rows_tabela_emprestimo.set(index, this.emprestimo);
+                       new Database().update_emprestimo(this.emprestimo);
+                   }
+                   
+                    
+                }         
                 showbox.close_box_emprestimo();
             }
                   

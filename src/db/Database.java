@@ -372,6 +372,62 @@ public class Database {
            
            return emprestimos;
     }
+     
+      public Emprestimo get_emprestimo_byUser(String ID_USER){
+          
+          
+           Connection connection = this.connection();  
+            Emprestimo emprestimo = new Emprestimo();
+            try{
+                     
+                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM TABELA_EMPRESTIMOS WHERE ID_USER = ?");
+                                  stmt.setString(1, ID_USER);
+                     
+                ResultSet resultado = stmt.executeQuery(); 
+                
+                if(resultado.next()){
+                    System.out.println("Usuario encontrado "+resultado.getString("ID_USER"));  
+                    System.out.println("Usuario encontrado "+resultado.getString("ID_USER"));
+                    emprestimo.setId(resultado.getString("ID"));
+                    emprestimo.setUser(get_user(resultado.getString("ID_USER")));
+                    emprestimo.setLivros(resultado.getString("IDS_LIVROS"));
+                    emprestimo.setData(resultado.getString("DATA"));  
+                }else{
+                    return null;
+                }
+                
+                
+                          
+                  
+                
+            }catch(SQLException e){
+                
+            }finally{
+
+            }
+            
+             return emprestimo;
+          
+         
+    }
+
+    public void update_emprestimo(Emprestimo emprestimo) {
+        Connection connection = this.connection();
+        try{
+                
+                System.out.println("Emprestimo atualizado "+emprestimo.getId());
+                PreparedStatement statement = connection.prepareStatement("UPDATE TABELA_EMPRESTIMOS SET ID_USER=?, IDS_LIVROS=?, DATA=? WHERE ID =?");
+                                  statement.setString(1, emprestimo.getUser().getId());
+                                  statement.setString(2, emprestimo.getLivros());
+                                  statement.setString(3, emprestimo.getData());
+                                  statement.setString(4, emprestimo.getId());
+                                                  
+                                  
+                                  statement.executeUpdate();
+                }catch(SQLException e){
+                    
+                }
+    }
 
     
 }

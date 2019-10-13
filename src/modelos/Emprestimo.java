@@ -18,6 +18,8 @@ import java.util.UUID;
 import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 /**
  *
@@ -73,6 +75,12 @@ public class Emprestimo extends RecursiveTreeObject<Emprestimo>{
         return anchor;
     }
     
+    public String getPeriodo(){
+        String[] datas = this.data.replace("[","").replace("]","").replace(" ","").split(",");
+        
+        String periodo =  new DateTime(datas[0]).toString(DateTimeFormat.forPattern("dd/MM/yyyy"))+" - "+new DateTime(datas[datas.length-1]).toString(DateTimeFormat.forPattern("dd/MM/yyyy"));
+        return periodo;
+    }
     public HBox getButtonsAction(){
         
         HBox grupo = new HBox(5);        
@@ -94,6 +102,7 @@ public class Emprestimo extends RecursiveTreeObject<Emprestimo>{
     public String getLivros() {
         return livros;
     }
+    
 
     public void setLivros(String livros) {
         this.livros = livros;
@@ -113,6 +122,16 @@ public class Emprestimo extends RecursiveTreeObject<Emprestimo>{
 
     public void setMulta(String multa) {
         this.multa = multa;
+    }
+    
+    public String getQuantLivros(){
+            String[] array = this.livros.replace("[","").replace("]","").split(",");
+            if(array.length > 1){
+                return array.length+" Livros";
+            }else{
+                return array.length+" Livro";
+            }
+         
     }
     
     
