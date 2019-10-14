@@ -81,7 +81,7 @@ public class Cadastro_livroController implements Initializable {
         btn_cadastro_livro_salvar.setOnAction((event)->{
             Tabela_livro linha = new Tabela_livro();
                         
-                     linha.setISBN(Integer.parseInt(cadastro_livro_ISBN.getText()));
+                     linha.setISBN(cadastro_livro_ISBN.getText());
                      linha.setTitulo(cadastro_livro_titulo.getText());
                      linha.setAutores(cadastro_livro_autores.getText());
                      linha.setEdicao(cadastro_livro_edicao.getText());

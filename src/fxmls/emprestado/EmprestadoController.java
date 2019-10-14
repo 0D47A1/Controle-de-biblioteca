@@ -70,7 +70,7 @@ public class EmprestadoController implements Initializable {
                     
                     list.forEach(id->{        
 
-                            empre_list.getItems().add(new Database().get_livro(Integer.valueOf(id.trim())));
+                            empre_list.getItems().add(new Database().get_livro(id));
                     });
                     
                     empre_list.setOnMousePressed((event)->{

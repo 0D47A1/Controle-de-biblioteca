@@ -122,7 +122,7 @@ public class HomeController implements Initializable {
         homeController = this;
         
  
-        JFXTreeTableColumn<Tabela_livro,Integer> ISBN = new JFXTreeTableColumn<>("ISBN");
+        JFXTreeTableColumn<Tabela_livro,String> ISBN = new JFXTreeTableColumn<>("ISBN");
         
         JFXTreeTableColumn<Tabela_livro,String> titulo = new JFXTreeTableColumn<>("Titulo");
         JFXTreeTableColumn<Tabela_livro,String> autores = new JFXTreeTableColumn<>("Autores");

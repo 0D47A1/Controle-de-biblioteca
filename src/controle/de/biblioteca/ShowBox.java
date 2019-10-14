@@ -55,7 +55,7 @@ public class ShowBox {
                             
                             
                             JFXTextField cadastro_livro_ISBN = (JFXTextField) node.lookup("#cadastro_livro_ISBN");                           
-                            cadastro_livro_ISBN.setText(livro.getISBN().toString());
+                            cadastro_livro_ISBN.setText(livro.getISBN());
                             JFXTextField cadastro_livro_titulo = (JFXTextField) node.lookup("#cadastro_livro_titulo");
                             cadastro_livro_titulo.setText(livro.getTitulo());
                             JFXTextField cadastro_livro_autores = (JFXTextField) node.lookup("#cadastro_livro_autores");

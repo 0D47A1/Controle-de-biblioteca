@@ -18,10 +18,11 @@ import modelos.Tabela_usuario;
  * @author melksedek
  */
 public class Database {
-   
+    private Connection conn = connection();
     public static void main() {
-             
+        
     }
+  
     
     private Connection connection(){
          Connection connection = null ;
@@ -45,19 +46,19 @@ public class Database {
     
     public ArrayList<Tabela_livro> get_livros() {
             
-        Connection connection = this.connection();
+        
         
         ArrayList<Tabela_livro> list = new ArrayList<>();   
             try{
                 
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM TABELA_LIVROS");
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM TABELA_LIVROS");
                 ResultSet resultSet = stmt.executeQuery();
                 
                 
                 while (resultSet.next()) {
                     
                     Tabela_livro livro = new Tabela_livro();
-                    livro.setISBN(resultSet.getInt("ISBN"));
+                    livro.setISBN(resultSet.getString("ISBN"));
                     livro.setTitulo(resultSet.getString("TITULO"));
                     livro.setAutores(resultSet.getString("AUTORES"));
                     livro.setEdicao(resultSet.getString("EDICAO"));
@@ -78,12 +79,12 @@ public class Database {
     
     public ArrayList<Tabela_livro> busca_livro(String busca, Integer limite) {
             
-        Connection connection = this.connection();
+       
         
         ArrayList<Tabela_livro> list = new ArrayList<>();   
             try{
                 
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM TABELA_LIVROS WHERE TITULO LIKE ? OR ISBN LIKE ? OR EDITORA LIKE ? LIMIT ?");                
+                PreparedStatement statement = conn.prepareStatement("SELECT * FROM TABELA_LIVROS WHERE TITULO LIKE ? OR ISBN LIKE ? OR EDITORA LIKE ? LIMIT ?");                
                                   statement.setString(1, "%"+busca+"%");
                                   statement.setString(2, "%"+busca+"%");
                                   statement.setString(3, "%"+busca+"%");
@@ -95,7 +96,7 @@ public class Database {
                 while (resultSet.next()) {
                     
                     Tabela_livro livro = new Tabela_livro();
-                    livro.setISBN(resultSet.getInt("ISBN"));
+                    livro.setISBN(resultSet.getString("ISBN"));
                     livro.setTitulo(resultSet.getString("TITULO"));
                     livro.setAutores(resultSet.getString("AUTORES"));
                     livro.setEdicao(resultSet.getString("EDICAO"));
@@ -117,9 +118,9 @@ public class Database {
     public void set_livro(Tabela_livro livro)  {
                 
                 try{
-                Connection connection = this.connection();
-                PreparedStatement statement = connection.prepareStatement("INSERT INTO TABELA_LIVROS( ISBN, TITULO, AUTORES, EDICAO, EDITORA, ANO) VALUES (?, ?, ?, ?, ?, ?)");
-                                  statement.setInt(1, livro.getISBN());
+              
+                PreparedStatement statement = conn.prepareStatement("INSERT INTO TABELA_LIVROS( ISBN, TITULO, AUTORES, EDICAO, EDITORA, ANO) VALUES (?, ?, ?, ?, ?, ?)");
+                                  statement.setString(1, livro.getISBN());
                                   statement.setString(2, livro.getTitulo());
                                   statement.setString(3, livro.getAutores());
                                   statement.setString(4, livro.getEdicao());
@@ -133,20 +134,20 @@ public class Database {
         
     }
     
-     public Tabela_livro get_livro(Integer id) {
+     public Tabela_livro get_livro(String id) {
             
-        Connection connection = this.connection();
+        
         Tabela_livro livro = new Tabela_livro();
          
             try{
                 
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM TABELA_LIVROS WHERE ISBN = ?");                
-                                  statement.setInt(1, id);                                  
+                PreparedStatement statement = conn.prepareStatement("SELECT * FROM TABELA_LIVROS WHERE ISBN = ?");                
+                                  statement.setString(1, id);                                  
                               
                 ResultSet resultSet = statement.executeQuery();             
                     
                 
-                livro.setISBN(resultSet.getInt("ISBN"));
+                livro.setISBN(resultSet.getString("ISBN"));
                 livro.setTitulo(resultSet.getString("TITULO"));
                 livro.setAutores(resultSet.getString("AUTORES"));
                 livro.setEdicao(resultSet.getString("EDICAO"));
@@ -162,15 +163,15 @@ public class Database {
      
     public void update_livro(Tabela_livro livro){
            try{
-                Connection connection = this.connection();
-                PreparedStatement statement = connection.prepareStatement("UPDATE TABELA_LIVROS SET ISBN=?, TITULO=?, AUTORES=?, EDICAO=?, EDITORA=?, ANO=? WHERE ISBN = ?");
-                                  statement.setInt(1, livro.getISBN());
+                
+                PreparedStatement statement = conn.prepareStatement("UPDATE TABELA_LIVROS SET ISBN=?, TITULO=?, AUTORES=?, EDICAO=?, EDITORA=?, ANO=? WHERE ISBN = ?");
+                                  statement.setString(1, livro.getISBN());
                                   statement.setString(2, livro.getTitulo());
                                   statement.setString(3, livro.getAutores());
                                   statement.setString(4, livro.getEdicao());
                                   statement.setString(5, livro.getEditora());
                                   statement.setInt(6, livro.getAno());
-                                  statement.setInt(7, livro.getISBN());
+                                  statement.setString(7, livro.getISBN());
                                   
                                   statement.executeUpdate();
                 }catch(SQLException e){
@@ -178,12 +179,12 @@ public class Database {
                 }
     }
     
-    public void excluir_livro(Integer ISBN){
+    public void excluir_livro(String ISBN){
               
                 try{
-                    Connection connection = this.connection();
-                    PreparedStatement statement = connection.prepareStatement("DELETE FROM TABELA_LIVROS WHERE ISBN = ?");
-                                      statement.setInt(1, ISBN);  
+                    
+                    PreparedStatement statement = conn.prepareStatement("DELETE FROM TABELA_LIVROS WHERE ISBN = ?");
+                                      statement.setString(1, ISBN);  
                                       statement.executeUpdate();
                 }catch(SQLException e){
                     
@@ -191,12 +192,12 @@ public class Database {
     }
     
     public ArrayList<Tabela_usuario> get_all_usuario(){
-        Connection connection = this.connection();
+        
         
         ArrayList<Tabela_usuario> list = new ArrayList<>();   
             try{
                 
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM TABELA_USUARIOS");
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM TABELA_USUARIOS");
                 ResultSet resultSet = stmt.executeQuery();
                 
                 
@@ -223,13 +224,13 @@ public class Database {
     }
     
     public ArrayList<Tabela_usuario> busca_usuario(String busca, Integer limite) {
-        Connection connection = this.connection();
+   
         
         ArrayList<Tabela_usuario> list = new ArrayList<>();   
             try{
              
                                  
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM TABELA_USUARIOS WHERE NOME LIKE ? OR LOGIN LIKE ? LIMIT ?");
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM TABELA_USUARIOS WHERE NOME LIKE ? OR LOGIN LIKE ? LIMIT ?");
                                   stmt.setString(1, "%"+busca+"%");
                                   stmt.setString(2, "%"+busca+"%");
                                   stmt.setInt(3, limite);
@@ -259,12 +260,12 @@ public class Database {
     }
     
       public Tabela_usuario get_user(String id) {
-            Connection connection = this.connection();  
+    
             Tabela_usuario usuario = new Tabela_usuario();
             try{
              
                                  
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM TABELA_USUARIOS WHERE ID = ?");
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM TABELA_USUARIOS WHERE ID = ?");
                                   stmt.setString(1, id);
                      
                 ResultSet resultSet = stmt.executeQuery();            
@@ -289,8 +290,8 @@ public class Database {
     public void set_usuario(Tabela_usuario usuario){
            
                 try{
-                    Connection connection = this.connection();
-                    PreparedStatement statement = connection.prepareStatement("INSERT INTO TABELA_USUARIOS( ID, NOME, LOGIN, SENHA, TIPO) VALUES (?, ?, ?, ?, ?)");
+                 
+                    PreparedStatement statement = conn.prepareStatement("INSERT INTO TABELA_USUARIOS( ID, NOME, LOGIN, SENHA, TIPO) VALUES (?, ?, ?, ?, ?)");
                                       statement.setString(1, usuario.getId());
                                       statement.setString(2, usuario.getNome());
                                       statement.setString(3, usuario.getLogin());
@@ -306,8 +307,8 @@ public class Database {
     
     public void update_usuario(Tabela_usuario usuario){
           try{
-                Connection connection = this.connection();
-                PreparedStatement statement = connection.prepareStatement("UPDATE TABELA_USUARIOS SET NOME=?, LOGIN=?, SENHA=?, TIPO=? WHERE ID = ?");
+                
+                PreparedStatement statement = conn.prepareStatement("UPDATE TABELA_USUARIOS SET NOME=?, LOGIN=?, SENHA=?, TIPO=? WHERE ID = ?");
                                   statement.setString(1, usuario.getId());
                                   statement.setString(2, usuario.getNome());
                                   statement.setString(3, usuario.getLogin());
@@ -322,8 +323,8 @@ public class Database {
     public void excluir_usuario(String id){
          
                 try{
-                    Connection connection = this.connection();
-                    PreparedStatement statement = connection.prepareStatement("DELETE FROM TABELA_USUARIOS WHERE ID = ?");
+            
+                    PreparedStatement statement = conn.prepareStatement("DELETE FROM TABELA_USUARIOS WHERE ID = ?");
                                       statement.setString(1, id);  
                                       statement.executeUpdate();
                 }catch(SQLException e){
@@ -334,9 +335,9 @@ public class Database {
     public void set_emprestimo(Emprestimo emprestimo){
            emprestimo.gerarId();
            try{
-                    Connection connection = this.connection();
+        
                     
-                    PreparedStatement statement = connection.prepareStatement("INSERT INTO TABELA_EMPRESTIMOS( ID, ID_USER, IDS_LIVROS, DATA) VALUES (?, ?, ?, ?)");
+                    PreparedStatement statement = conn.prepareStatement("INSERT INTO TABELA_EMPRESTIMOS( ID, ID_USER, IDS_LIVROS, DATA) VALUES (?, ?, ?, ?)");
                                       statement.setString(1, emprestimo.getId());
                                       statement.setString(2, emprestimo.getUser().getId());
                                       statement.setString(3, emprestimo.getLivros());
@@ -352,9 +353,9 @@ public class Database {
      public ArrayList<Emprestimo> get_all_emprestimos(){
            ArrayList<Emprestimo> emprestimos = new ArrayList<>();
            try{
-                    Connection connection = this.connection();
+                 
                     
-                    PreparedStatement statement = connection.prepareStatement("SELECT * FROM TABELA_EMPRESTIMOS");
+                    PreparedStatement statement = conn.prepareStatement("SELECT * FROM TABELA_EMPRESTIMOS");
                                   
 
                     ResultSet resultado =  statement.executeQuery();
@@ -378,11 +379,11 @@ public class Database {
       public Emprestimo get_emprestimo_byUser(String ID_USER){
           
           
-           Connection connection = this.connection();  
+           
             Emprestimo emprestimo = new Emprestimo();
             try{
                      
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM TABELA_EMPRESTIMOS WHERE ID_USER = ?");
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM TABELA_EMPRESTIMOS WHERE ID_USER = ?");
                                   stmt.setString(1, ID_USER);
                      
                 ResultSet resultado = stmt.executeQuery(); 
@@ -414,11 +415,11 @@ public class Database {
     }
 
     public void update_emprestimo(Emprestimo emprestimo) {
-        Connection connection = this.connection();
+    
         try{
                 
-                System.out.println("Emprestimo atualizado "+emprestimo.getId());
-                PreparedStatement statement = connection.prepareStatement("UPDATE TABELA_EMPRESTIMOS SET ID_USER=?, IDS_LIVROS=?, DATA=? WHERE ID =?");
+                System.out.println("Emprestimo update livros "+emprestimo.getLivros());
+                PreparedStatement statement = conn.prepareStatement("UPDATE TABELA_EMPRESTIMOS SET ID_USER= ?, IDS_LIVROS= ?, DATA= ? WHERE ID = ?");
                                   statement.setString(1, emprestimo.getUser().getId());
                                   statement.setString(2, emprestimo.getLivros());
                                   statement.setString(3, emprestimo.getData());
@@ -432,10 +433,10 @@ public class Database {
     }
 
     public void delete_emprestimo(String id) {
-            Connection connection = this.connection();
+           
             try{
                 
-                PreparedStatement statement = connection.prepareStatement("DELETE FROM TABELA_EMPRESTIMOS WHERE ID = ?");
+                PreparedStatement statement = conn.prepareStatement("DELETE FROM TABELA_EMPRESTIMOS WHERE ID = ?");
                                   statement.setString(1, id);  
                                   statement.executeUpdate();
             }catch(SQLException e){

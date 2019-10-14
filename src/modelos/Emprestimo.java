@@ -57,23 +57,7 @@ public class Emprestimo extends RecursiveTreeObject<Emprestimo>{
         this.user = user;
     }
 
-    public AnchorPane getCombox_livros(){
-       JFXComboBox<Tabela_livro> livros = new JFXComboBox();
-        AnchorPane anchor  = new AnchorPane();
-	List<String> list =  Arrays.asList(this.livros.replace("[","").replace("]","").split(","));
-        
-        list.forEach(id->{        
-               
-                livros.getItems().add(new Database().get_livro(Integer.valueOf(id.trim())));
-        });
-        livros.setValue(livros.getItems().get(0));
-        anchor.setTopAnchor(livros,00.0);
-        anchor.setBottomAnchor(livros,00.0);
-        anchor.setLeftAnchor(livros,00.0);
-        anchor.setRightAnchor(livros,00.0);
-        anchor.getChildren().add(livros);
-        return anchor;
-    }
+ 
     
     public String getPeriodo(){
         String[] datas = this.data.replace("[","").replace("]","").replace(" ","").split(",");

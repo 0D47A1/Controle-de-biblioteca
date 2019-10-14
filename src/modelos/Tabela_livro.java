@@ -21,14 +21,14 @@ import javafx.scene.layout.VBox;
  */
 public class Tabela_livro extends RecursiveTreeObject<Tabela_livro>{
 
-    Integer ISBN;
+    String ISBN;
     String titulo;
     String autores;
     String edicao;
     String editora;
     Integer ano;
 
-    public void setISBN(Integer ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
     public void setTitulo(String titulo) {
@@ -71,7 +71,7 @@ public class Tabela_livro extends RecursiveTreeObject<Tabela_livro>{
         return ano;
     }
 
-    public Integer getISBN() {
+    public String getISBN() {
         return ISBN;
     }
     

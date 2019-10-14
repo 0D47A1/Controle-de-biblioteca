@@ -159,7 +159,7 @@ public class EmprestimosController implements Initializable {
                     emp_list_livros.getItems().clear();
                     list.forEach(id->{     
                         
-                             Tabela_livro livro = new Database().get_livro(Integer.valueOf(id.trim()));
+                             Tabela_livro livro = new Database().get_livro(id);
                              
                              Integer index =  IntStream.range(0, emp_list_livros.getItems().size())
                             .filter(i -> emp_list_livros.getItems().get(i).getTitulo().equals(livro.getTitulo()))
@@ -245,7 +245,7 @@ public class EmprestimosController implements Initializable {
 
                         
 
-                        ArrayList<Integer> livros_ids = new ArrayList<>(); // Array armazenará temporariamente os ids(ISBN) de cada livro
+                        ArrayList<String> livros_ids = new ArrayList<>(); // Array armazenará temporariamente os ids(ISBN) de cada livro
                         ArrayList<String> livros_data_emprestimo = new ArrayList<>();
                         emp_list_livros.getItems().forEach(livro ->{
 
@@ -270,9 +270,9 @@ public class EmprestimosController implements Initializable {
                         
                     
                     emp_list_livros.getItems().forEach(livro ->{
-                            if(!livros_ids.contains(livro.getISBN().toString())){                               
+                            if(!livros_ids.contains(livro.getISBN())){                               
                                
-                               livros_ids.add(livro.getISBN().toString()); 
+                               livros_ids.add(livro.getISBN()); 
                                livros_data_emprestimo.add(dataHoje.toString()); 
                             }
                             
