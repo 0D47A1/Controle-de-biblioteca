@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import modelos.Emprestimo;
 import modelos.Tabela_livro;
+import modelos.Tabela_usuario;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormat;
@@ -71,7 +72,14 @@ public class EmprestadoController implements Initializable {
                     empre_list.setOnMousePressed((event)->{
                         
                         DateTime data_emprestimo = new DateTime(list_data.get(empre_list.getSelectionModel().getSelectedIndex()).trim());
-                        DateTime data_entrega = data_emprestimo.plusDays(5);
+                        Tabela_usuario usuario = emprestimo_data.getUser();
+                        DateTime data_entrega;
+                        if(usuario.getTipo().equals("Professor")){
+                            data_entrega = data_emprestimo.plusDays(15);
+                        }else{
+                            data_entrega = data_emprestimo.plusDays(7);
+                        }
+                        
                         Integer dias_atraso = Days.daysBetween(data_entrega, new DateTime()).getDays();
                         
                         if(dias_atraso > 0){

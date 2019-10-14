@@ -83,8 +83,7 @@ public class Tabela_livro extends RecursiveTreeObject<Tabela_livro>{
         grupo.setPrefWidth(300);
         grupo.setAlignment(Pos.CENTER);
         JFXButton editar = new JFXButton("Editar");
-        JFXButton excluir = new JFXButton("Excluir");
-        JFXButton emprestar = new JFXButton("Emprestar");
+        JFXButton excluir = new JFXButton("Excluir");       
         
         editar.setOnAction((event)->{
             homeController.update = true;
@@ -101,11 +100,11 @@ public class Tabela_livro extends RecursiveTreeObject<Tabela_livro>{
         
        
         editar.setStyle("-fx-background-color:#0277BD;  -fx-text-fill:#fff");
-        emprestar.setStyle("-fx-background-color:#0277BD;  -fx-text-fill:#fff"); 
+        
         excluir.setStyle("-fx-background-color:#c62828; -fx-text-fill:#fff");
         
         
-        grupo.getChildren().addAll(emprestar,editar,excluir);
+        grupo.getChildren().addAll(editar,excluir);
  
 
         

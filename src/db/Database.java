@@ -83,10 +83,11 @@ public class Database {
         ArrayList<Tabela_livro> list = new ArrayList<>();   
             try{
                 
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM TABELA_LIVROS WHERE TITULO LIKE ? LIMIT ?");
-                
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM TABELA_LIVROS WHERE TITULO LIKE ? OR ISBN LIKE ? OR EDITORA LIKE ? LIMIT ?");                
                                   statement.setString(1, "%"+busca+"%");
-                                  statement.setInt(2, limite);
+                                  statement.setString(2, "%"+busca+"%");
+                                  statement.setString(3, "%"+busca+"%");
+                                  statement.setInt(4, limite);
                               
                 ResultSet resultSet = statement.executeQuery();
                 
@@ -228,9 +229,10 @@ public class Database {
             try{
              
                                  
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM TABELA_USUARIOS WHERE NOME LIKE ? LIMIT ?");
+                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM TABELA_USUARIOS WHERE NOME LIKE ? OR LOGIN LIKE ? LIMIT ?");
                                   stmt.setString(1, "%"+busca+"%");
-                                  stmt.setInt(2, limite);
+                                  stmt.setString(2, "%"+busca+"%");
+                                  stmt.setInt(3, limite);
                 ResultSet resultSet = stmt.executeQuery();
                 
                 

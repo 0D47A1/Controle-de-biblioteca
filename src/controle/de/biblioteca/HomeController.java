@@ -36,6 +36,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -60,8 +61,9 @@ public class HomeController implements Initializable {
     @FXML
     private StackPane root_stackPane;
     @FXML
-    private Label label;
-    
+    private Label label;    
+    @FXML
+    private JFXTextField input_busca;
     @FXML
     private JFXButton btn_registrar_livro;
     
@@ -97,6 +99,20 @@ public class HomeController implements Initializable {
     
     public Boolean update ;
     
+
+    @FXML
+    private Tab tab_livros;
+
+  
+    @FXML
+    private Tab tab_usuarios;
+
+
+    @FXML
+    private Tab tab_emprestimo;
+    
+    private int tab = 0;
+   
  
     
     @Override
@@ -249,7 +265,62 @@ public class HomeController implements Initializable {
             showbox.show_box_emprestimo(null);
         });
         
-     
+       
+    
+    
+    tab_livros.setOnSelectionChanged((action)->{    
+        input_busca.promptTextProperty().set("Está procurando algum livro?");
+        input_busca.clear();
+        tab = 0;
+        
+    });
+    
+    tab_usuarios.setOnSelectionChanged((action)->{    
+        input_busca.promptTextProperty().set("Qual usuário você quer buscar?");
+        input_busca.clear();
+        tab = 1;
+    });
+
+   
+    tab_emprestimo.setOnSelectionChanged((action)->{    
+        input_busca.promptTextProperty().set("Quer buscar algum empréstimo?");
+        input_busca.clear();
+        tab = 2;
+    });
+        
+     input_busca.textProperty().addListener(observable -> {  
+            switch(tab){
+                case 0:
+                    
+                     ArrayList<Tabela_livro> busca = new Database().busca_livro(input_busca.getText(),10);
+                     // ArrayList<Tabela_livro> livros = new Database().get_livros() ; //null; 
+        
+                        if(busca != null){
+                            rows_tabela_livres.clear();
+                            busca.forEach((livro)->{
+                                rows_tabela_livres.add(livro);
+                            });   
+                        }
+                break;
+                
+                case 1:
+                     ArrayList<Tabela_usuario> busca_usuario = new Database().busca_usuario(input_busca.getText(),10); //null; 
+        
+                    if(busca_usuario != null){
+                        rows_tabela_usuarios.clear();
+                        busca_usuario.forEach((usuario)->{
+                            rows_tabela_usuarios.add(usuario);
+                        });   
+                    }                   
+                break;
+                
+                case 2:
+                    System.out.println("Emprestimo: "+input_busca.getText());                   
+                break;
+                    
+            }
+            
+    });
     
     }    
     
