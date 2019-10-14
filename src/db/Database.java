@@ -431,5 +431,17 @@ public class Database {
                 }
     }
 
+    public void delete_emprestimo(String id) {
+            Connection connection = this.connection();
+            try{
+                
+                PreparedStatement statement = connection.prepareStatement("DELETE FROM TABELA_EMPRESTIMOS WHERE ID = ?");
+                                  statement.setString(1, id);  
+                                  statement.executeUpdate();
+            }catch(SQLException e){
+
+            }
+    }
+
     
 }
