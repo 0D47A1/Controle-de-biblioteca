@@ -4,7 +4,7 @@
 * Em Java, crie um programa para controle de uma biblioteca que atenda aos seguintes requisitos mínimos:* 
 * Os dados de livro devem ser armazenados em uma base de dados relacional (postgres, mysql, sqlserver etc.)
 * Os dados de outras entidades podem ser armazenados em listas em memória (quem desejar, pode armazená-los no banco também).
-* Deve ser possível cadastrar livros: incluir livros, alterar livros, excluir livros, listar livros, buscar livros pelo ISBN, por parte do * título e pela editora.
+* Deve ser possível cadastrar livros: incluir livros, alterar livros, excluir livros, listar livros, buscar livros pelo ISBN, por parte do título e pela editora.
 * Cada livro deve conter informações acerca de: autores, edição, editora, nome, ano.
 * Deve ser possível cadastrar usuários: incluir usuários, excluir usuários, listar usuários, buscar usuários por parte do nome e pelo login.
 * Deve ser possível efetuar empréstimos: emprestar livros, renovar empréstimo, devolver livros, listar empréstimos, buscar empréstimos por * livro (ISBN e título), por exemplar de livro e por usuário.
