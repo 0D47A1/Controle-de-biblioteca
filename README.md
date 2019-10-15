@@ -16,5 +16,18 @@ Usuários com multas só podem ter um único livro emprestado.
 Não é permitido aos usuários com multas reservarem livros.
 A multa é de R$ 1,00 por dia (útil ou não útil)
 
+![Capturar](https://user-images.githubusercontent.com/9409514/66796344-bbf3a200-eedd-11e9-8788-bb86876413b4.jpg)
+
+
+### Detalhes
+* Feito em JavaFX
+* Apache NetBeans 11.1
+#### Bibliotecas usadas
+* jfoenix-8.0.8  - Para a interface nos padrões do Material Design
+* joda-time-2.10.4  - Para o calculo e formatão de datas
+* sqlite-jdbc-3.23.1 - Drive para fazer uso do sqlite
+
+#### OBS: Pelo motivo de que o prazo da entrega foi finalizada, 14/10/2019, o projeto não está totalmente completo, mas funcional, e não será mais continuado 
+
 # Professor Eduardo Piveta
   Universidade Federal de Santa Maria
