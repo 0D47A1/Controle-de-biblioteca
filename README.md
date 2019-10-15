@@ -24,7 +24,7 @@ A multa é de R$ 1,00 por dia (útil ou não útil)
 * Apache NetBeans 11.1
 #### Bibliotecas usadas
 * jfoenix-8.0.8  - Para a interface nos padrões do Material Design
-* joda-time-2.10.4  - Para o calculo e formatão de datas
+* joda-time-2.10.4  - Para o cálculo e formatação de datas
 * sqlite-jdbc-3.23.1 - Drive para fazer uso do sqlite
 
 #### OBS: Pelo motivo de que o prazo da entrega foi finalizada, 14/10/2019, o projeto não está totalmente completo, mas funcional, e não será mais continuado 
