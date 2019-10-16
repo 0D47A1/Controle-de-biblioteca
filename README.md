@@ -27,7 +27,7 @@
 * joda-time-2.10.4  - Para o cálculo e formatação de datas
 * sqlite-jdbc-3.23.1 - Drive para fazer uso do sqlite
 
-#### OBS: Pelo motivo de que o prazo da entrega foi finalizada, 14/10/2019, o projeto não está totalmente completo, mas funcional, e não será mais continuado 
+#### OBS: Pelo motivo de que o prazo da entrega foi finalizado, 14/10/2019, o projeto não está totalmente completo, mas funcional, e não será mais continuado 
 
 # Professor Eduardo Piveta
   Universidade Federal de Santa Maria
