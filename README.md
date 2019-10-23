@@ -29,5 +29,4 @@
 
 #### OBS: Pelo motivo de que o prazo da entrega foi finalizado, 14/10/2019, o projeto não está totalmente completo, mas funcional, e não será mais continuado 
 
-# Professor Eduardo Piveta
-  Universidade Federal de Santa Maria
+
